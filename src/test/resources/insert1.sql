@@ -1,0 +1,1 @@
+insert into PRODUCT(name, price) values('Monitor', 100);
