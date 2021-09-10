@@ -16,7 +16,7 @@ import kotlin.test.assertFailsWith
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class ProductRepositoryTest(
+class JpaRepositoryTest(
     @Autowired
     val repository: ProductRepository
 ) {

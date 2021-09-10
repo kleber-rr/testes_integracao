@@ -1,10 +1,12 @@
 package com.testeintegracao.testes
 
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.validation.constraints.*
+import kotlin.collections.HashMap
 
 @Entity(name= "PRODUCT")
 data class Product(
@@ -20,4 +22,11 @@ data class Product(
 ) {
     constructor() : this(null, "", null)
     constructor(name: String, price: Int) : this(null, name, price)
+
+    fun toMap() : Map<String, Object> {
+        var productAsMap = HashMap<String, Object>()
+        productAsMap.put("name", name as Object)
+        productAsMap.put("price", price as Object)
+        return productAsMap
+    }
 }
