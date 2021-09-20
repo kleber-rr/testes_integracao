@@ -43,9 +43,9 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun mustShowAllContacts(){
         testEntityManager.persist(contato)
-        mockMvc.perform(get("/agenda/"))
+        mockMvc.perform(get("/agendactrl/"))
             .andExpect(status().isOk)
-            .andExpect(view().name("agenda"))
+            .andExpect(view().name("agendactrl"))
             .andExpect(model().attribute("contatos", Matchers.hasSize<Any>(1)))
             .andExpect(model().attribute("contatos", Matchers.hasItem<Any>(
                 Matchers.allOf(
@@ -62,9 +62,9 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun mustShowOneContact() {
         var id: Long = testEntityManager.persistAndGetId(contato) as Long
-        mockMvc.perform(get("/agenda/contato/{id}", id))
+        mockMvc.perform(get("/agendactrl/contato/{id}", id))
             .andExpect(status().isOk)
-            .andExpect(view().name("agenda/contato"))
+            .andExpect(view().name("agendactrl/contato"))
             .andExpect(model().attribute("contato", Matchers.any(Contato::class.java)))
             .andExpect(model().attribute("contato", contato))
             .andDo(print())
@@ -74,9 +74,9 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun shouldBeRemoveContact() {
         var id: Long = testEntityManager.persistAndGetId(contato) as Long
-        mockMvc.perform(get("/agenda/remover/{id}", id))
+        mockMvc.perform(get("/agendactrl/remover/{id}", id))
             .andExpect(status().is3xxRedirection)
-            .andExpect(view().name("redirect:agenda/"))
+            .andExpect(view().name("redirect:agendactrl/"))
             .andExpect(flash().attribute("successMessage", "Contato removido com sucesso"))
             .andDo(print())
 
@@ -89,12 +89,12 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun insertWithDddNullShouldBeReturnAnError() {
 
-        mockMvc.perform(post("/agenda/inserir")
+        mockMvc.perform(post("/agendactrl/inserir")
                 .param("telefone", contato.telefone)
                 .param("nome", contato.nome)
             )
             .andExpect(status().isOk)
-            .andExpect(view().name("agenda/inserir"))
+            .andExpect(view().name("agendactrl/inserir"))
             .andExpect(model().attribute("contato", Matchers.any(Contato::class.java)))
             .andExpect(model().attributeHasFieldErrors("contato", "ddd"))
             .andExpect(model().attributeHasFieldErrorCode("contato", "ddd", "NotBlank"))
@@ -105,12 +105,12 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun insertWithTelefoneNullShouldBeReturnAnError() {
 
-        mockMvc.perform(post("/agenda/inserir")
+        mockMvc.perform(post("/agendactrl/inserir")
             .param("ddd", contato.ddd)
             .param("nome", contato.nome)
         )
             .andExpect(status().isOk)
-            .andExpect(view().name("agenda/inserir"))
+            .andExpect(view().name("agendactrl/inserir"))
             .andExpect(model().attribute("contato", Matchers.any(Contato::class.java)))
             .andExpect(model().attributeHasFieldErrors("contato", "telefone"))
             .andExpect(model().attributeHasFieldErrorCode("contato", "telefone", "NotBlank"))
@@ -121,12 +121,12 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun insertWithNomeNullShouldBeReturnAnError() {
 
-        mockMvc.perform(post("/agenda/inserir")
+        mockMvc.perform(post("/agendactrl/inserir")
             .param("ddd", contato.ddd)
             .param("telefone", contato.telefone)
         )
             .andExpect(status().isOk)
-            .andExpect(view().name("agenda/inserir"))
+            .andExpect(view().name("agendactrl/inserir"))
             .andExpect(model().attribute("contato", Matchers.any(Contato::class.java)))
             .andExpect(model().attributeHasFieldErrors("contato", "nome"))
             .andExpect(model().attributeHasFieldErrorCode("contato", "nome", "NotBlank"))
@@ -137,13 +137,13 @@ class AgendaControllerIntegrationTest(
     @Throws(Exception::class)
     fun insertShouldBeSaveContact() {
 
-        mockMvc.perform(post("/agenda/inserir")
+        mockMvc.perform(post("/agendactrl/inserir")
             .param("ddd", contato.ddd)
             .param("nome", contato.nome)
             .param("telefone", contato.telefone)
         )
             .andExpect(status().isOk)
-            .andExpect(view().name("agenda/inserir"))
+            .andExpect(view().name("agendactrl/inserir"))
             .andExpect(model().attribute("contato", Matchers.any(Contato::class.java)))
             .andExpect(model().attribute("successMessage", "Contato cadastrado com sucesso"))
             .andDo(print())

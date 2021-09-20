@@ -49,7 +49,7 @@ class AgendaControllerIntegrationAndExpectedTest(
     @Test
     @Throws(Exception::class)
     fun checkStatus(){
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agenda/"))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agendactrl/"))
         var status = MockMvcResultMatchers.status()
 
         result.andExpect(status.isOk)
@@ -60,7 +60,7 @@ class AgendaControllerIntegrationAndExpectedTest(
     @Test
     @Throws(Exception::class)
     fun checkStatusWithDoAndReturn(){
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agenda/"))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agendactrl/"))
         result.andDo(MockMvcResultHandlers.print())
 
         var status = result.andReturn().response.status
@@ -71,21 +71,21 @@ class AgendaControllerIntegrationAndExpectedTest(
     @Test
     @Throws(Exception::class)
     fun checkView() {
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agenda/"))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agendactrl/"))
         var view = MockMvcResultMatchers.view()
 
-        result.andExpect(view.name("agenda"))
-        result.andExpect(view.name(Matchers.`is`("agenda")))
+        result.andExpect(view.name("agendactrl"))
+        result.andExpect(view.name(Matchers.`is`("agendactrl")))
     }
 
     @Test
     @Throws(Exception::class)
     fun checkViewWithDoAndReturn() {
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agenda/"))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agendactrl/"))
         result.andDo(MockMvcResultHandlers.print())
 
         var mav = result.andReturn().modelAndView
-        Assert.assertEquals("agenda", mav!!.viewName)
+        Assert.assertEquals("agendactrl", mav!!.viewName)
     }
 
     @Test
@@ -94,7 +94,7 @@ class AgendaControllerIntegrationAndExpectedTest(
         contato = Contato("Chefe", "0y", "9xxxxxxxx9")
         testEntityManager.persist(contato)
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agenda/"))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agendactrl/"))
         var model = MockMvcResultMatchers.model()
 
         result.andExpect(model.attributeExists("contatos"))
@@ -114,7 +114,7 @@ class AgendaControllerIntegrationAndExpectedTest(
         contato = Contato("Chefe", "0y", "9xxxxxxxx9")
         testEntityManager.persist(contato)
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agenda/"))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/agendactrl/"))
         result.andDo(MockMvcResultHandlers.print())
 
         var mav = result.andReturn().modelAndView

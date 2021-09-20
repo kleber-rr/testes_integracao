@@ -1,5 +1,7 @@
 package com.testeintegracao.testes.model
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -7,6 +9,7 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity(name = "Contato")
+@JsonDeserialize
 data class Contato(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long?,
@@ -22,5 +25,13 @@ data class Contato(
 
 ) {
     constructor() : this(null, "", "", "")
-    constructor(ddd: String, telefone: String, nome: String) : this(null, ddd, telefone, nome)
+    constructor(ddd: String?, telefone: String?, nome: String?) : this(null, ddd, telefone, nome)
+
+    fun toMap() : Map<String, Object> {
+        var asMap = HashMap<String, Object>()
+        asMap.put("ddd", ddd as Object)
+        asMap.put("telefone", telefone as Object)
+        asMap.put("nome", nome as Object)
+        return asMap
+    }
 }

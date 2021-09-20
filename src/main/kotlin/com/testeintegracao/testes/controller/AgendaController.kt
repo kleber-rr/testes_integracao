@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.validation.Valid
 
 @Controller
-@RequestMapping("/agenda")
+@RequestMapping("/agendactrl")
 class AgendaController(
     @Autowired
     val service: ContatoService
@@ -28,7 +28,7 @@ class AgendaController(
 
     @GetMapping("/contato/{id}")
     fun getContato(@PathVariable("id") id: Long, mav: ModelAndView): ModelAndView {
-        mav.viewName = "agenda/contato"
+        mav.viewName = "agendactrl/contato"
         mav.addObject("contato", service.buscarContato(id))
         return mav
     }
@@ -37,7 +37,7 @@ class AgendaController(
     fun remover(@PathVariable("id") id: Long, redirect: RedirectAttributes): ModelAndView {
         redirect.addFlashAttribute("successMessage", "Contato removido com sucesso")
         service.remover(id)
-        return ModelAndView("redirect:agenda/")
+        return ModelAndView("redirect:agendactrl/")
     }
 
     @GetMapping("/cadastro")
@@ -50,7 +50,7 @@ class AgendaController(
     fun inserir(@Valid contato: Contato, bind: BindingResult, mav: ModelAndView): ModelAndView {
         if(!bind.hasErrors()){
             mav.addObject("successMessage", "Contato cadastrado com sucesso")
-            service.inserir(contato)
+            service.inserirOuAlterar(contato)
         }
         return mav
     }
