@@ -1,5 +1,6 @@
 package com.testeintegracao.testes
 
+import com.testeintegracao.testes.repository.ProductRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

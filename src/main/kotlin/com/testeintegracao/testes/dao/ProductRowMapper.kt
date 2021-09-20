@@ -1,6 +1,6 @@
 package com.testeintegracao.testes.dao
 
-import com.testeintegracao.testes.Product
+import com.testeintegracao.testes.model.Product
 import org.springframework.jdbc.core.RowMapper
 import java.sql.ResultSet
 

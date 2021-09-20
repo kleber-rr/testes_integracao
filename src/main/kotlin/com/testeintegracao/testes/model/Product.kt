@@ -1,4 +1,4 @@
-package com.testeintegracao.testes
+package com.testeintegracao.testes.model
 
 import java.util.*
 import javax.persistence.Entity

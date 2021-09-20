@@ -1,5 +1,7 @@
 package com.testeintegracao.testes
 
+import com.testeintegracao.testes.model.Product
+import com.testeintegracao.testes.repository.ProductRepository
 import org.assertj.core.api.Assertions as assertJ
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions as junit
