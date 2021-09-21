@@ -237,11 +237,16 @@ class AgendaRestControllerTest(
     }
 
     @Test
-    fun alterarDeveRetornarContatoComDelete(){
+    fun removerDeveExcluirContato(){
+        var resultado: ResponseEntity<Contato> = testRestTemplate.exchange("/agenda/remover/{id}", HttpMethod.DELETE, null, contato!!.id!!)
+        Assert.assertEquals(HttpStatus.NO_CONTENT, resultado.statusCode)
+        Assert.assertNull(resultado.body)
+    }
+
+    @Test
+    fun removerDeveExcluirContatoComDelete(){
         testRestTemplate.delete("/agenda/remover/"+ contato!!.id!!)
-
         var resultado: Optional<Contato> = repository.findById(contato.id!!)
-
         Assert.assertTrue(resultado.isEmpty)
     }
 }
