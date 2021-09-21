@@ -26,6 +26,8 @@ dependencies {
 	testImplementation("com.h2database:h2:1.4.200")
 
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.hibernate:hibernate-envers")
+
 
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.30")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

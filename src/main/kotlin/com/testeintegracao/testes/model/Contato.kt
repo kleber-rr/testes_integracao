@@ -1,6 +1,8 @@
 package com.testeintegracao.testes.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import org.hibernate.envers.Audited
 import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -10,6 +12,8 @@ import javax.validation.constraints.NotBlank
 
 @Entity(name = "Contato")
 @JsonDeserialize
+@Audited
+@JsonIgnoreProperties("hibernateLazyInitializer")
 data class Contato(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long?,
