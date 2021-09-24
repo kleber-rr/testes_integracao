@@ -1,4 +1,3 @@
-
 spring:
   jpa:
     hibernate:
@@ -9,3 +8,9 @@ spring:
     password: postgres
   jackson:
     default-property-inclusion: non_null
+security:
+  oauth2:
+    resource:
+      id: bcrypt
+server:
+  port: 5000

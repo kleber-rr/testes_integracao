@@ -28,6 +28,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.hibernate:hibernate-envers")
 
+	compileOnly("org.projectlombok:lombok:1.18.20")
+
+	implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
+	implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.5.2")
 
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.30")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
